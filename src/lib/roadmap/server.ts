@@ -90,7 +90,13 @@ export async function generateAiCareerRoadmap(
     );
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = (
+    process.env["GEMINI_API_KEY"] ||
+    process.env.GEMINI_API_KEY ||
+    ""
+  )
+    .trim()
+    .replace(/^["']|["']$/g, "");
 
   // Format context for prompt
   const skillsList =

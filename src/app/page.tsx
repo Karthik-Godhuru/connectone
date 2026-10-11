@@ -13,6 +13,7 @@ import {
   Code2,
   Award,
   Zap,
+  Sparkles,
 } from "lucide-react";
 
 export default async function Home() {
@@ -22,6 +23,7 @@ export default async function Home() {
     const { data } = await supabase.auth.getUser();
     user = data?.user || null;
   } catch {}
+
   const schemaTables = [
     { name: "profiles", desc: "User identity, bio, links, and career domain metadata" },
     { name: "skills", desc: "Master technical and craft skill taxonomy" },
@@ -38,66 +40,90 @@ export default async function Home() {
     {
       title: "Complementary Teammate Matching",
       description:
-        "Calculates bilateral skill synergy across 10 disciplines. Connects developers with designers, founders with technical architects, and artists with media engineers.",
-      metric: "6-Factor Weighted Scoring",
+        "Bilateral skill synergy algorithm pairing frontend architects with AI specialists, product designers with backend engineers, and founders with domain experts.",
+      metric: "6-Factor Weighted Synergy",
+      icon: Users,
+      accent: "text-[#D5B38B]",
+      border: "border-[#D5B38B]/20",
     },
     {
-      title: "AI Profile Intelligence",
+      title: "AI Profile Intelligence Studio",
       description:
-        "Transforms onboarding data into an executive synthesis covering verified strengths, critical skill gaps, recommended learning paths, and collaboration dynamics.",
-      metric: "Gemini 3.8 Flash Powered",
+        "Transforms background information into executive synthesis covering verified competencies, strategic skill gaps, learning paths, and collaboration dynamics.",
+      metric: "Gemini 3.8 Intelligence",
+      icon: Cpu,
+      accent: "text-[#B86539]",
+      border: "border-[#9E532D]/20",
     },
     {
-      title: "Structured Career Roadmaps",
+      title: "Dynamic Career Roadmaps",
       description:
-        "Synthesizes target career trajectories with sequential milestones, realistic timeframes, priority levels, and checklist tracking saved directly to PostgreSQL.",
-      metric: "Cross-Disciplinary Tracks",
+        "Calibrates milestones, sequential timeframes, priorities, and actionable tactical next steps stored directly in relational PostgreSQL schema.",
+      metric: "Cross-Disciplinary Paths",
+      icon: Compass,
+      accent: "text-[#D5B38B]",
+      border: "border-[#D5B38B]/20",
     },
     {
       title: "Opportunity Discovery Engine",
       description:
-        "Scores and surfaces relevant hackathons, fellowships, internships, research grants, and open-source initiatives calibrated to your current stage and goals.",
-      metric: "10 Curated Categories",
+        "Surfaces curated hackathons, research grants, builder fellowships, and high-impact internships calibrated to your active domain and current stage.",
+      metric: "10 Curated Verticals",
+      icon: Award,
+      accent: "text-[#8FAAB5]",
+      border: "border-[#5A7E8B]/20",
     },
   ];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-24">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-28 relative">
       {/* Hero Section */}
-      <section className="pt-8 pb-12 sm:pt-16 sm:pb-16 text-center">
-        <div className="mx-auto max-w-3xl space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/80 px-3.5 py-1 text-xs font-medium text-slate-300">
-            <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            <span>ConnectOne Platform</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-slate-400">Collaboration & Career Engine</span>
+      <section className="pt-10 pb-12 sm:pt-20 sm:pb-20 text-center relative">
+        {/* Subtle hero warm glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[340px] bg-gradient-to-r from-[#4E1F1A]/22 via-[#9E532D]/15 to-[#D5B38B]/10 blur-[110px] rounded-full pointer-events-none" />
+
+        <div className="mx-auto max-w-3xl space-y-7 relative z-10">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#DBD3C1]/15 bg-[#252E33]/60 px-4 py-1.5 text-xs font-medium text-[#DBD3C1] backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#D5B38B] opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#D5B38B]" />
+            </span>
+            <span className="font-semibold text-[#F4EFE6]">ConnectOne Studio</span>
+            <span className="text-[#DBD3C1]/30">•</span>
+            <span className="text-[#8FAAB5]">AI-Powered Student Career & Collaboration OS</span>
           </div>
 
-          <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl sm:leading-tight">
-            Connect with complementary builders. Move toward your career goals.
-          </h1>
+          <div className="space-y-3">
+            <span className="font-script text-2xl sm:text-3xl text-[#D5B38B] block tracking-normal">
+              Curated synergy for builders
+            </span>
+            <h1 className="font-serif text-4xl sm:text-6xl sm:leading-[1.12] text-[#DBD3C1] font-normal tracking-tight">
+              Connect with <span className="italic font-normal text-[#F4EFE6]">complementary builders</span>.{" "}
+              <span className="block mt-1 font-serif text-[#D5B38B]">
+                Accelerate your craft.
+              </span>
+            </h1>
+          </div>
 
-          <p className="mx-auto max-w-2xl text-sm text-slate-400 sm:text-base leading-relaxed">
-            ConnectOne brings together developers, designers, researchers, and creators.
-            Match based on complementary skills, generate structured progression roadmaps,
-            and discover high-impact opportunities.
+          <p className="mx-auto max-w-2xl text-sm sm:text-base leading-relaxed text-[#8FAAB5]">
+            ConnectOne unifies developers, designers, hackers, and researchers. Match through multi-factor skill synergy, generate guided career progression roadmaps, and build together.
           </p>
 
-          <div className="pt-2 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="pt-3 flex flex-col items-center justify-center gap-3 sm:flex-row">
             {user ? (
               <>
                 <Link
                   href="/dashboard"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-blue-500 sm:w-auto"
+                  className="glass-button-primary flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3 text-xs font-semibold sm:w-auto shadow-lg shadow-[#9E532D]/25"
                 >
-                  <span>Go to Dashboard</span>
+                  <span>Open Studio Dashboard</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
                   href="/discover"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg border border-slate-800 bg-slate-900 px-5 py-2.5 text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white sm:w-auto"
+                  className="glass-button-secondary flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3 text-xs font-semibold sm:w-auto"
                 >
-                  <Users className="h-3.5 w-3.5 text-slate-400" />
+                  <Users className="h-3.5 w-3.5 text-[#D5B38B]" />
                   <span>Discover Teammates</span>
                 </Link>
               </>
@@ -105,14 +131,14 @@ export default async function Home() {
               <>
                 <Link
                   href="/signup"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-blue-500 sm:w-auto"
+                  className="glass-button-primary flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3 text-xs font-semibold sm:w-auto shadow-lg shadow-[#9E532D]/25"
                 >
-                  <span>Get Started</span>
+                  <span>Get Started Free</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
                   href="/login"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg border border-slate-800 bg-slate-900 px-5 py-2.5 text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white sm:w-auto"
+                  className="glass-button-secondary flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3 text-xs font-semibold sm:w-auto"
                 >
                   <span>Sign In to Dashboard</span>
                 </Link>
@@ -120,25 +146,25 @@ export default async function Home() {
             )}
             <Link
               href="/status"
-              className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-slate-800 bg-slate-950 px-4 py-2.5 text-xs font-medium text-slate-400 transition hover:text-slate-300 sm:w-auto"
+              className="glass-pill flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-medium text-[#8FAAB5] hover:text-[#DBD3C1] transition sm:w-auto"
             >
               <Activity className="h-3.5 w-3.5 text-emerald-400" />
-              <span>System Status</span>
+              <span>System Health</span>
             </Link>
           </div>
 
           {/* Architectural specs pill */}
-          <div className="pt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500">
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-slate-400" />
+          <div className="pt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-[#8FAAB5]/90">
+            <span className="flex items-center gap-2">
+              <CheckCircle2 className="h-3.5 w-3.5 text-[#D5B38B]" />
               Next.js 16 App Router
             </span>
-            <span className="flex items-center gap-1.5">
-              <ShieldCheck className="h-3.5 w-3.5 text-slate-400" />
+            <span className="flex items-center gap-2">
+              <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
               Supabase PostgreSQL & SSR Auth
             </span>
-            <span className="flex items-center gap-1.5">
-              <Cpu className="h-3.5 w-3.5 text-slate-400" />
+            <span className="flex items-center gap-2">
+              <Sparkles className="h-3.5 w-3.5 text-[#D5B38B]" />
               Gemini 3.8 Intelligence
             </span>
           </div>
@@ -147,116 +173,126 @@ export default async function Home() {
 
       {/* Product Workflow: 4 Functional Pillars */}
       <section className="space-y-8">
-        <div className="border-b border-slate-800 pb-4">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400">
-            Core Architecture
-          </h2>
-          <p className="mt-1 text-xl font-bold text-white sm:text-2xl">
-            A cohesive system for collaboration and career momentum
+        <div className="border-b border-[#DBD3C1]/10 pb-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+          <div>
+            <span className="editorial-kicker text-[10px] text-[#D5B38B]">
+              Core Capabilities
+            </span>
+            <h2 className="mt-1 font-serif text-xl sm:text-2xl font-medium text-[#DBD3C1] tracking-tight">
+              A cohesive system for collaboration and career momentum
+            </h2>
+          </div>
+          <p className="text-xs text-[#8FAAB5] max-w-sm">
+            Engineered with deep multi-factor matchmaking, intelligent synthesis, and live telemetry.
           </p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {capabilities.map((cap, i) => (
-            <div
-              key={i}
-              className="flex flex-col justify-between rounded-xl border border-slate-800 bg-slate-900/40 p-5"
-            >
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400">
-                  {cap.metric}
-                </span>
-                <h3 className="mt-2 text-sm font-bold text-white">{cap.title}</h3>
-                <p className="mt-2 text-xs text-slate-400 leading-relaxed">
-                  {cap.description}
-                </p>
+          {capabilities.map((cap, i) => {
+            const Icon = cap.icon;
+            return (
+              <div
+                key={i}
+                className="glass-card flex flex-col justify-between rounded-2xl p-6 relative overflow-hidden"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className={`editorial-kicker text-[9px] font-bold ${cap.accent}`}>
+                      {cap.metric}
+                    </span>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#252E33]/60 border border-[#DBD3C1]/10">
+                      <Icon className={`h-4 w-4 ${cap.accent}`} />
+                    </div>
+                  </div>
+                  <h3 className="text-sm font-bold text-[#DBD3C1] tracking-tight leading-snug">{cap.title}</h3>
+                  <p className="mt-2.5 text-xs text-[#8FAAB5] leading-relaxed">
+                    {cap.description}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
       {/* Interactive Flow Preview Grid */}
       <section className="grid gap-8 lg:grid-cols-2">
         {/* Matchmaking Methodology Preview */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-6 space-y-4">
-          <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-              Explainable Scoring
+        <div className="glass-panel rounded-2xl p-7 space-y-5">
+          <div className="border-b border-[#DBD3C1]/10 pb-4">
+            <span className="editorial-kicker text-[10px] text-[#D5B38B]">
+              Explainable Scoring Engine
             </span>
-            <h3 className="mt-1 text-base font-bold text-white">
-              Deterministic Teammate Matchmaking
+            <h3 className="mt-1 font-serif text-lg font-medium text-[#DBD3C1]">
+              Deterministic Teammate Synergy Formulation
             </h3>
-            <p className="mt-1 text-xs text-slate-400 leading-relaxed">
-              Matching balances identical strengths with cross-disciplinary synergies.
-              A builder who excels at Machine Learning matches strongly with a product designer or full-stack engineer.
+            <p className="mt-1 text-xs text-[#8FAAB5] leading-relaxed">
+              Matchmaking prioritizes bilateral complementarity over homogeneous skill sets. Developers pair with designers, and technical builders unite with domain experts.
             </p>
           </div>
 
-          <div className="space-y-2.5 pt-2 text-xs">
-            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950 p-3">
-              <span className="text-slate-300 font-medium">Complementary Skill Synergy</span>
-              <span className="font-bold text-white">30%</span>
-            </div>
-            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950 p-3">
-              <span className="text-slate-300 font-medium">Shared Verified Interests</span>
-              <span className="font-bold text-white">20%</span>
-            </div>
-            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950 p-3">
-              <span className="text-slate-300 font-medium">Career Goal Compatibility</span>
-              <span className="font-bold text-white">20%</span>
-            </div>
-            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950 p-3">
-              <span className="text-slate-300 font-medium">Project Artifact Alignment</span>
-              <span className="font-bold text-white">15%</span>
-            </div>
-            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950 p-3">
-              <span className="text-slate-300 font-medium">Domain & Education Cross-Over</span>
-              <span className="font-bold text-white">10%</span>
-            </div>
-            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950 p-3">
-              <span className="text-slate-300 font-medium">Direct Primary Target Alignment</span>
-              <span className="font-bold text-white">5%</span>
-            </div>
+          <div className="space-y-2.5 text-xs">
+            {[
+              { label: "Complementary Skill Synergy", pct: 30, desc: "Cross-domain technical pairing (e.g., Frontend ↔ Backend)" },
+              { label: "Shared Verified Interests", pct: 20, desc: "Alignment in domain verticals and hackathon focus" },
+              { label: "Career Goal Compatibility", pct: 20, desc: "Harmonized career trajectory and timeline objectives" },
+              { label: "Project Artifact Alignment", pct: 15, desc: "Historical repo and build evidence synergy" },
+              { label: "Domain & Education Cross-Over", pct: 10, desc: "Institutional & regional proximity weighting" },
+              { label: "Direct Primary Target Alignment", pct: 5, desc: "Primary career track synchronicity" },
+            ].map((weight, idx) => (
+              <div
+                key={idx}
+                className="flex items-center justify-between rounded-xl border border-[#DBD3C1]/08 bg-[#192024]/60 p-3"
+              >
+                <div>
+                  <span className="text-[#DBD3C1] font-semibold text-xs">{weight.label}</span>
+                  <p className="text-[10px] text-[#8FAAB5]/70">{weight.desc}</p>
+                </div>
+                <span className="font-bold text-[#D5B38B] tabular-nums text-xs ml-3">
+                  {weight.pct}%
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Database & Schema Integrity */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-6 space-y-4">
+        <div className="glass-panel rounded-2xl p-7 space-y-5 flex flex-col justify-between">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-              Database Schema
-            </span>
-            <h3 className="mt-1 text-base font-bold text-white">
-              9 Connected Supabase Tables
-            </h3>
-            <p className="mt-1 text-xs text-slate-400 leading-relaxed">
-              Clean relational schema modeling profiles, skills, interests, projects, connections,
-              matches, and roadmaps without redundancy.
-            </p>
-          </div>
+            <div className="border-b border-[#DBD3C1]/10 pb-4">
+              <span className="editorial-kicker text-[10px] text-[#8FAAB5]">
+                Relational Architecture
+              </span>
+              <h3 className="mt-1 font-serif text-lg font-medium text-[#DBD3C1]">
+                9 Connected Supabase Tables
+              </h3>
+              <p className="mt-1 text-xs text-[#8FAAB5] leading-relaxed">
+                Normalized PostgreSQL relational model governing profiles, skill junction graphs, connection invites, and AI roadmap progression.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-2 gap-2 text-xs pt-2">
-            {schemaTables.map((t, i) => (
-              <div
-                key={i}
-                className="rounded-lg border border-slate-800 bg-slate-950 p-2.5"
-              >
-                <div className="flex items-center gap-1.5">
-                  <Database className="h-3 w-3 text-slate-500" />
-                  <span className="font-mono text-[11px] font-bold text-slate-200">{t.name}</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs pt-4">
+              {schemaTables.map((t, i) => (
+                <div
+                  key={i}
+                  className="rounded-xl border border-[#DBD3C1]/08 bg-[#192024]/60 p-3"
+                >
+                  <div className="flex items-center gap-2">
+                    <Database className="h-3.5 w-3.5 text-[#D5B38B]" />
+                    <span className="font-mono text-[11px] font-bold text-[#DBD3C1]">{t.name}</span>
+                  </div>
+                  <p className="mt-1 text-[10px] text-[#8FAAB5] line-clamp-1">{t.desc}</p>
                 </div>
-                <p className="mt-1 text-[10px] text-slate-400 line-clamp-1">{t.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <div className="pt-2">
             <Link
               href="/status"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#D5B38B] hover:text-[#E4C8A6] transition"
             >
-              <span>Inspect schema health check</span>
+              <span>Inspect schema health & connection status</span>
               <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
@@ -264,46 +300,52 @@ export default async function Home() {
       </section>
 
       {/* Bottom Call to Action */}
-      <section className="rounded-xl border border-slate-800 bg-slate-900/60 p-8 sm:p-12 text-center space-y-4">
-        <h2 className="text-2xl font-bold text-white sm:text-3xl">
-          Ready to find collaborators and level up?
-        </h2>
-        <p className="mx-auto max-w-xl text-xs text-slate-400 sm:text-sm">
-          Complete onboarding in 2 minutes, get your personalized AI career roadmap,
-          and discover peer builders matched to your goals.
-        </p>
-        <div className="pt-2 flex justify-center gap-3">
-          {user ? (
-            <>
-              <Link
-                href="/dashboard"
-                className="rounded-lg bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white hover:bg-blue-500"
-              >
-                Go to Dashboard
-              </Link>
-              <Link
-                href="/profile"
-                className="rounded-lg border border-slate-800 bg-slate-950 px-5 py-2.5 text-xs font-semibold text-slate-300 hover:text-white"
-              >
-                View Your Profile
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link
-                href="/signup"
-                className="rounded-lg bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white hover:bg-blue-500"
-              >
-                Create Your Account
-              </Link>
-              <Link
-                href="/login"
-                className="rounded-lg border border-slate-800 bg-slate-950 px-5 py-2.5 text-xs font-semibold text-slate-300 hover:text-white"
-              >
-                Sign In
-              </Link>
-            </>
-          )}
+      <section className="glass-panel rounded-3xl p-8 sm:p-14 text-center space-y-5 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#4E1F1A]/20 via-[#9E532D]/12 to-[#D5B38B]/10 pointer-events-none" />
+
+        <div className="relative z-10 max-w-2xl mx-auto space-y-4">
+          <span className="editorial-kicker text-[10px] text-[#D5B38B]">
+            Join ConnectOne
+          </span>
+          <h2 className="font-serif text-2xl font-medium text-[#DBD3C1] sm:text-4xl tracking-tight">
+            Ready to find your ideal collaborators and advance?
+          </h2>
+          <p className="text-xs text-[#8FAAB5] sm:text-sm leading-relaxed">
+            Complete quick onboarding, receive your personalized AI career roadmap, and match with verified teammates calibrated to your objectives.
+          </p>
+          <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3">
+            {user ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="glass-button-primary rounded-xl px-6 py-3 text-xs font-semibold"
+                >
+                  Go to Dashboard
+                </Link>
+                <Link
+                  href="/profile"
+                  className="glass-button-secondary rounded-xl px-6 py-3 text-xs font-semibold"
+                >
+                  View Your Profile
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/signup"
+                  className="glass-button-primary rounded-xl px-6 py-3 text-xs font-semibold shadow-lg shadow-[#9E532D]/25"
+                >
+                  Create Your Account
+                </Link>
+                <Link
+                  href="/login"
+                  className="glass-button-secondary rounded-xl px-6 py-3 text-xs font-semibold"
+                >
+                  Sign In
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </section>
     </div>

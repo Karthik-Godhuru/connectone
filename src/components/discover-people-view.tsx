@@ -16,6 +16,8 @@ import {
   XCircle,
   ChevronDown,
   ChevronUp,
+  Sparkles,
+  Zap,
 } from "lucide-react";
 import type { MatchRecommendation } from "@/types/matching";
 
@@ -37,7 +39,7 @@ const CAREER_DOMAINS = [
 ];
 
 const SCORE_THRESHOLDS = [
-  { label: "All Matches", value: 0 },
+  { label: "All Synergy Levels", value: 0 },
   { label: "70%+ Compatibility", value: 70 },
   { label: "80%+ High Compatibility", value: 80 },
   { label: "85%+ Exceptional Synergy", value: 85 },
@@ -166,34 +168,36 @@ export function DiscoverPeopleView() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-7">
       {/* Directory Header */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-6 sm:p-8 backdrop-blur-sm">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="glass-panel rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-36 bg-gradient-to-bl from-[#4E1F1A]/22 via-[#9E532D]/10 to-transparent blur-3xl pointer-events-none" />
+
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between relative z-10">
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-              Builder Network
+            <span className="editorial-kicker text-[10px] text-[#D5B38B]">
+              Synergy Discovery Studio
             </span>
-            <h1 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              Discover Teammates
+            <h1 className="font-serif mt-1 text-2xl font-medium tracking-tight text-[#DBD3C1] sm:text-3xl">
+              Discover Complementary Teammates
             </h1>
-            <p className="mt-1 text-xs text-slate-400 max-w-xl">
-              Connect with peers based on complementary skills, shared interests, and mutual career goals.
+            <p className="mt-1 text-xs text-[#8FAAB5] max-w-xl leading-relaxed">
+              Find peers who balance your technical and creative skill set, shared domain passions, and project aspirations.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-950 px-3.5 py-2 text-xs text-slate-300">
-            <Users className="h-4 w-4 text-slate-400" />
-            <span className="font-semibold text-white">{total}</span>
-            <span>Candidates Available</span>
+          <div className="glass-pill flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs text-[#DBD3C1]">
+            <Users className="h-4 w-4 text-[#D5B38B]" />
+            <span className="font-bold text-[#DBD3C1] tabular-nums">{total}</span>
+            <span className="text-[#8FAAB5]">Candidates Available</span>
           </div>
         </div>
 
         {/* Filter Controls */}
-        <div className="mt-6 grid gap-3 sm:grid-cols-3 border-t border-slate-800/80 pt-5">
+        <div className="mt-6 grid gap-3 sm:grid-cols-3 border-t border-[#DBD3C1]/10 pt-5 relative z-10">
           {/* Search */}
           <div className="relative">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-500" />
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[#8FAAB5]/60" />
             <input
               type="text"
               value={searchQuery}
@@ -202,7 +206,7 @@ export function DiscoverPeopleView() {
                 setPage(1);
               }}
               placeholder="Search by name, skill, interest..."
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+              className="glass-input w-full rounded-xl py-2 pl-9 pr-3.5 text-xs text-[#DBD3C1] placeholder-[#8FAAB5]/50 focus:border-[#D5B38B] focus:ring-[#D5B38B]"
             />
           </div>
 
@@ -214,10 +218,10 @@ export function DiscoverPeopleView() {
                 setSelectedDomain(e.target.value);
                 setPage(1);
               }}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 py-2 px-3 text-xs text-slate-300 focus:border-blue-500 focus:outline-none"
+              className="glass-input w-full rounded-xl py-2 px-3.5 text-xs text-[#DBD3C1] focus:border-[#D5B38B]"
             >
               {CAREER_DOMAINS.map((dom) => (
-                <option key={dom} value={dom}>
+                <option key={dom} value={dom} className="bg-[#192024] text-[#DBD3C1]">
                   {dom === "All" ? "All Career Domains" : dom}
                 </option>
               ))}
@@ -232,10 +236,10 @@ export function DiscoverPeopleView() {
                 setMinScore(Number(e.target.value));
                 setPage(1);
               }}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 py-2 px-3 text-xs text-slate-300 focus:border-blue-500 focus:outline-none"
+              className="glass-input w-full rounded-xl py-2 px-3.5 text-xs text-[#DBD3C1] focus:border-[#D5B38B]"
             >
               {SCORE_THRESHOLDS.map((t) => (
-                <option key={t.value} value={t.value}>
+                <option key={t.value} value={t.value} className="bg-[#192024] text-[#DBD3C1]">
                   {t.label}
                 </option>
               ))}
@@ -245,7 +249,7 @@ export function DiscoverPeopleView() {
       </div>
 
       {error && (
-        <div className="flex items-center gap-2 rounded-xl border border-rose-500/30 bg-rose-950/20 px-4 py-3 text-xs text-rose-300">
+        <div className="flex items-center gap-2.5 rounded-xl border border-rose-500/30 bg-rose-950/20 px-4 py-3 text-xs text-rose-300">
           <AlertCircle className="h-4 w-4 text-rose-400 shrink-0" />
           <span>{error}</span>
         </div>
@@ -253,20 +257,20 @@ export function DiscoverPeopleView() {
 
       {/* Candidates List */}
       {isLoading ? (
-        <div className="flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-slate-900/30 p-16 text-center">
-          <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
-          <p className="mt-3 text-xs text-slate-400">Loading candidate matches...</p>
+        <div className="glass-panel flex flex-col items-center justify-center rounded-2xl p-20 text-center">
+          <Loader2 className="h-6 w-6 animate-spin text-[#D5B38B]" />
+          <p className="mt-3 text-xs text-[#8FAAB5]">Computing multi-factor compatibility scores...</p>
         </div>
       ) : matches.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-slate-800 bg-slate-900/30 p-16 text-center">
-          <Users className="mx-auto h-8 w-8 text-slate-500" />
-          <h3 className="mt-3 text-sm font-bold text-white">No Matching Candidates Found</h3>
-          <p className="mt-1 text-xs text-slate-400">
-            Try adjusting your search criteria or domain filter.
+        <div className="glass-panel rounded-2xl p-16 text-center border-dashed border-[#DBD3C1]/15">
+          <Users className="mx-auto h-8 w-8 text-[#8FAAB5]/60" />
+          <h3 className="mt-3 font-serif text-sm font-medium text-[#DBD3C1]">No Matching Candidates Found</h3>
+          <p className="mt-1 text-xs text-[#8FAAB5]">
+            Try broadening your search criteria or selecting a different career domain.
           </p>
         </div>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-2">
           {matches.map((match) => {
             const {
               candidate,
@@ -281,46 +285,46 @@ export function DiscoverPeopleView() {
             return (
               <div
                 key={candidate.userId}
-                className="flex flex-col justify-between rounded-xl border border-slate-800 bg-slate-900/40 p-5 transition hover:border-slate-700"
+                className="glass-card flex flex-col justify-between rounded-2xl p-6 relative overflow-hidden"
               >
                 <div>
                   {/* Top row: Name, Domain, Score Badge */}
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-slate-800 font-bold text-white text-sm border border-slate-700">
+                      <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#9E532D]/25 via-[#4E1F1A]/20 to-[#D5B38B]/20 border border-[#DBD3C1]/10 text-sm font-black text-[#D5B38B]">
                         {candidate.fullName.charAt(0).toUpperCase()}
                       </div>
                       <div>
-                        <h3 className="font-semibold text-white text-sm">
+                        <h3 className="font-serif font-medium text-[#DBD3C1] text-base tracking-tight">
                           {candidate.fullName}
                         </h3>
-                        <p className="text-xs text-slate-400">{candidate.careerDomain}</p>
+                        <p className="text-xs text-[#8FAAB5]">{candidate.careerDomain}</p>
                       </div>
                     </div>
 
-                    {/* Prominent Analytical Compatibility Score */}
+                    {/* Prominent Compatibility Score Badge */}
                     <div className="text-right shrink-0">
-                      <div className="inline-flex items-center gap-1 rounded-md border border-slate-700 bg-slate-800/80 px-2.5 py-1 text-xs font-bold text-white">
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-400 tabular-nums shadow-[0_0_12px_rgba(16,185,129,0.15)]">
                         <span>{compatibilityScore}%</span>
-                        <span className="text-[10px] font-normal text-slate-400">Match</span>
+                        <span className="text-[10px] font-normal text-emerald-400/80">Match</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Bio */}
                   {candidate.bio && (
-                    <p className="mt-3 text-xs text-slate-300 line-clamp-2 leading-relaxed">
+                    <p className="mt-3 text-xs text-[#DBD3C1]/85 line-clamp-2 leading-relaxed">
                       {candidate.bio}
                     </p>
                   )}
 
                   {/* Why Good Match (Explanation) */}
-                  <div className="mt-3 rounded-lg border border-slate-800 bg-slate-950 p-3 text-xs">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                      Match Rationale
+                  <div className="mt-3.5 rounded-xl border border-[#DBD3C1]/08 bg-[#192024]/60 p-3 text-xs">
+                    <span className="editorial-kicker text-[9px] text-[#D5B38B]">
+                      Synergy Analysis
                     </span>
-                    <p className="mt-1 text-slate-300 text-[11px] leading-relaxed">
-                      {explanation}
+                    <p className="mt-1 text-[#DBD3C1]/90 text-[11px] leading-relaxed italic">
+                      &ldquo;{explanation}&rdquo;
                     </p>
                   </div>
 
@@ -330,7 +334,7 @@ export function DiscoverPeopleView() {
                       {complementarySkillPairs.map((pair, idx) => (
                         <span
                           key={idx}
-                          className="rounded border border-indigo-500/20 bg-indigo-500/10 px-2 py-0.5 text-[10px] font-medium text-indigo-300"
+                          className="glass-pill rounded-lg px-2.5 py-0.5 text-[10px] font-medium text-[#D5B38B] border-[#D5B38B]/20"
                           title={pair.synergyReason}
                         >
                           ⚡ {pair.userSkill} + {pair.candidateSkill}
@@ -344,7 +348,7 @@ export function DiscoverPeopleView() {
                     {candidate.skills.slice(0, 4).map((s, i) => (
                       <span
                         key={i}
-                        className="rounded border border-slate-800 bg-slate-950 px-2 py-0.5 text-[10px] text-slate-300"
+                        className="glass-pill rounded px-2 py-0.5 text-[10px] text-[#8FAAB5]"
                       >
                         {s.name}
                       </span>
@@ -353,43 +357,43 @@ export function DiscoverPeopleView() {
 
                   {/* Expandable Breakdown Drawer */}
                   {isBreakdownOpen && breakdown && (
-                    <div className="mt-3 rounded-lg border border-slate-800 bg-slate-950 p-3 space-y-1.5 text-[11px]">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        Score Breakdown (0–100)
+                    <div className="mt-3.5 rounded-xl border border-[#DBD3C1]/10 bg-[#192024]/70 p-3.5 space-y-1.5 text-[11px]">
+                      <span className="editorial-kicker text-[9px] text-[#8FAAB5]">
+                        Multi-Factor Breakdown (0–100)
                       </span>
-                      <div className="flex justify-between text-slate-300">
+                      <div className="flex justify-between text-[#8FAAB5]">
                         <span>Complementary Skills (Max 30)</span>
-                        <span className="font-semibold text-white">{breakdown.complementarySkillsScore} pts</span>
+                        <span className="font-semibold text-[#DBD3C1] tabular-nums">{breakdown.complementarySkillsScore} pts</span>
                       </div>
-                      <div className="flex justify-between text-slate-300">
+                      <div className="flex justify-between text-[#8FAAB5]">
                         <span>Shared Interests (Max 20)</span>
-                        <span className="font-semibold text-white">{breakdown.sharedInterestsScore} pts</span>
+                        <span className="font-semibold text-[#DBD3C1] tabular-nums">{breakdown.sharedInterestsScore} pts</span>
                       </div>
-                      <div className="flex justify-between text-slate-300">
+                      <div className="flex justify-between text-[#8FAAB5]">
                         <span>Career Goals (Max 20)</span>
-                        <span className="font-semibold text-white">{breakdown.careerGoalsScore} pts</span>
+                        <span className="font-semibold text-[#DBD3C1] tabular-nums">{breakdown.careerGoalsScore} pts</span>
                       </div>
-                      <div className="flex justify-between text-slate-300">
+                      <div className="flex justify-between text-[#8FAAB5]">
                         <span>Project Artifacts (Max 15)</span>
-                        <span className="font-semibold text-white">{breakdown.projectCompatibilityScore} pts</span>
+                        <span className="font-semibold text-[#DBD3C1] tabular-nums">{breakdown.projectCompatibilityScore} pts</span>
                       </div>
-                      <div className="flex justify-between text-slate-300">
+                      <div className="flex justify-between text-[#8FAAB5]">
                         <span>Domain & Education (Max 10)</span>
-                        <span className="font-semibold text-white">{breakdown.domainEducationScore} pts</span>
+                        <span className="font-semibold text-[#DBD3C1] tabular-nums">{breakdown.domainEducationScore} pts</span>
                       </div>
-                      <div className="flex justify-between text-slate-300">
+                      <div className="flex justify-between text-[#8FAAB5]">
                         <span>Direct Goal Target (Max 5)</span>
-                        <span className="font-semibold text-white">{breakdown.goalAlignmentScore} pts</span>
+                        <span className="font-semibold text-[#DBD3C1] tabular-nums">{breakdown.goalAlignmentScore} pts</span>
                       </div>
                     </div>
                   )}
                 </div>
 
                 {/* Bottom Actions Row */}
-                <div className="mt-4 flex items-center justify-between border-t border-slate-800 pt-3">
+                <div className="mt-4 flex items-center justify-between border-t border-[#DBD3C1]/08 pt-3.5">
                   <button
                     onClick={() => toggleBreakdown(candidate.userId)}
-                    className="flex items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-white"
+                    className="flex items-center gap-1 text-[11px] font-medium text-[#8FAAB5] hover:text-[#DBD3C1] transition"
                   >
                     <span>{isBreakdownOpen ? "Hide Breakdown" : "View Breakdown"}</span>
                     {isBreakdownOpen ? (
@@ -401,26 +405,26 @@ export function DiscoverPeopleView() {
 
                   {/* Connect / Pending / Connected Button States */}
                   {cState === "accepted" ? (
-                    <span className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-950/20 px-3 py-1.5 text-xs font-semibold text-emerald-400">
+                    <span className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-semibold text-emerald-400">
                       <UserCheck className="h-3.5 w-3.5" />
                       <span>Connected</span>
                     </span>
                   ) : cState === "pending" ? (
-                    <span className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-400">
-                      <Clock className="h-3.5 w-3.5" />
+                    <span className="glass-pill inline-flex items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-xs font-medium text-[#8FAAB5]">
+                      <Clock className="h-3.5 w-3.5 text-[#D5B38B]" />
                       <span>Pending Request</span>
                     </span>
                   ) : cState === "received" ? (
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => handleRespondReceived(candidate.userId, "accepted")}
-                        className="rounded-lg bg-emerald-600 px-2.5 py-1 text-xs font-semibold text-white hover:bg-emerald-500"
+                        className="rounded-xl bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-500"
                       >
                         Accept
                       </button>
                       <button
                         onClick={() => handleRespondReceived(candidate.userId, "declined")}
-                        className="rounded-lg border border-slate-700 px-2.5 py-1 text-xs font-semibold text-slate-300 hover:text-white"
+                        className="rounded-xl border border-[#DBD3C1]/10 px-3 py-1.5 text-xs font-semibold text-[#8FAAB5] hover:text-[#DBD3C1]"
                       >
                         Decline
                       </button>
@@ -429,7 +433,7 @@ export function DiscoverPeopleView() {
                     <button
                       onClick={() => handleConnect(candidate.userId)}
                       disabled={cState === "connecting"}
-                      className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue-500 disabled:opacity-50"
+                      className="glass-button-primary inline-flex items-center gap-1.5 rounded-xl px-4 py-1.5 text-xs font-semibold disabled:opacity-50"
                     >
                       {cState === "connecting" ? (
                         <>

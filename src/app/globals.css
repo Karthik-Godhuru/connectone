@@ -1,16 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  --background: #090d16;
-  --foreground: #f1f5f9;
-  --card: #0f172a;
-  --card-foreground: #f8fafc;
-  --primary: #3b82f6;
-  --primary-foreground: #ffffff;
-  --accent: #6366f1;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  --border: #1e293b;
+  /* ========================================================
+     EARTHY LIQUID GLASS COLOR PALETTE
+     ======================================================== */
+  --burgundy: #4E1F1A;
+  --burgundy-dark: #371512;
+  --terracotta: #9E532D;
+  --terracotta-light: #B86539;
+  --sand: #D5B38B;
+  --sand-light: #E4C8A6;
+  --sand-muted: #B99368;
+  --warm-ivory: #DBD3C1;
+  --warm-ivory-light: #F4EFE6;
+  --charcoal-teal: #252E33;
+  --charcoal-teal-dark: #192024;
+  --charcoal-teal-surface: #20282D;
+  --muted-bluegrey: #5A7E8B;
+  --muted-bluegrey-light: #8FAAB5;
+
+  /* Semantic UI Tokens */
+  --background: #192024;
+  --foreground: #DBD3C1;
+  --surface-elevated: #20282D;
+  --surface-glass: rgba(37, 46, 51, 0.72);
+  --surface-glass-border: rgba(219, 211, 193, 0.12);
+  --surface-glass-highlight: rgba(213, 179, 139, 0.15);
+  --primary: #9E532D;
+  --primary-burgundy: #4E1F1A;
+  --card: #20282D;
+  --card-foreground: #DBD3C1;
+  --muted: #252E33;
+  --muted-foreground: #8FAAB5;
+  --border: rgba(219, 211, 193, 0.12);
 }
 
 @theme inline {
@@ -19,10 +41,12 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-primary: var(--primary);
-  --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+  --font-sans: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  --font-script: var(--font-script), "Alex Brush", cursive;
 }
 
 * {
@@ -37,9 +61,175 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   min-height: 100vh;
   margin: 0;
   display: flex;
   flex-direction: column;
+}
+
+/* ========================================================
+   EARTHY LIQUID GLASS DESIGN SYSTEM UTILITIES
+   ======================================================== */
+
+/* Frosted glass container */
+.glass-panel {
+  background: rgba(32, 40, 45, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(219, 211, 193, 0.12);
+  box-shadow: 0 12px 36px 0 rgba(10, 14, 16, 0.45), inset 0 1px 0 0 rgba(213, 179, 139, 0.14);
+}
+
+/* Translucent interactive card */
+.glass-card {
+  background: rgba(37, 46, 51, 0.62);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(219, 211, 193, 0.1);
+  box-shadow: 0 6px 24px -2px rgba(10, 14, 16, 0.35), inset 0 1px 0 0 rgba(219, 211, 193, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(45, 55, 61, 0.8);
+  border-color: rgba(213, 179, 139, 0.32);
+  box-shadow: 0 14px 34px -4px rgba(10, 14, 16, 0.55), 0 0 22px -2px rgba(158, 83, 45, 0.15), inset 0 1px 0 0 rgba(213, 179, 139, 0.22);
+  transform: translateY(-1.5px);
+}
+
+/* Pill badge / tag */
+.glass-pill {
+  background: rgba(219, 211, 193, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(219, 211, 193, 0.14);
+  box-shadow: inset 0 1px 0 0 rgba(213, 179, 139, 0.08);
+  color: var(--warm-ivory);
+}
+
+/* Primary Glass Button - Burgundy & Terracotta gradient with Sand highlight */
+.glass-button-primary {
+  background: linear-gradient(135deg, #9E532D 0%, #4E1F1A 100%);
+  color: #F4EFE6;
+  border: 1px solid rgba(213, 179, 139, 0.35);
+  box-shadow: 0 4px 18px rgba(78, 31, 26, 0.4), inset 0 1px 0 0 rgba(213, 179, 139, 0.28);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-button-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #B86539 0%, #5E2520 100%);
+  border-color: rgba(213, 179, 139, 0.55);
+  box-shadow: 0 6px 24px rgba(158, 83, 45, 0.45), inset 0 1px 0 0 rgba(213, 179, 139, 0.42);
+  transform: translateY(-1px);
+}
+
+.glass-button-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(78, 31, 26, 0.35);
+}
+
+/* Secondary Glass Button - Restrained Charcoal Teal & Warm Ivory border */
+.glass-button-secondary {
+  background: rgba(219, 211, 193, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(219, 211, 193, 0.16);
+  box-shadow: inset 0 1px 0 0 rgba(219, 211, 193, 0.06);
+  color: #DBD3C1;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-button-secondary:hover:not(:disabled) {
+  background: rgba(219, 211, 193, 0.1);
+  border-color: rgba(213, 179, 139, 0.38);
+  color: #F4EFE6;
+  transform: translateY(-1px);
+}
+
+/* Glass Form Inputs - Charcoal Teal obsidian base with Sand/Terracotta focus */
+.glass-input {
+  background: rgba(25, 32, 36, 0.75);
+  border: 1px solid rgba(219, 211, 193, 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #DBD3C1;
+  box-shadow: inset 0 2px 4px rgba(10, 14, 16, 0.4), inset 0 1px 0 0 rgba(219, 211, 193, 0.05);
+  transition: all 0.2s ease;
+}
+
+.glass-input:focus {
+  border-color: rgba(213, 179, 139, 0.65);
+  box-shadow: 0 0 0 2px rgba(158, 83, 45, 0.25), inset 0 1px 0 0 rgba(213, 179, 139, 0.1);
+  outline: none;
+}
+
+/* Earthy Ambient Glow Highlights */
+.glow-terracotta {
+  box-shadow: 0 0 28px -4px rgba(158, 83, 45, 0.32);
+}
+
+.glow-burgundy {
+  box-shadow: 0 0 28px -4px rgba(78, 31, 26, 0.38);
+}
+
+.glow-sand {
+  box-shadow: 0 0 24px -4px rgba(213, 179, 139, 0.28);
+}
+
+/* Editorial Typography Classes */
+.font-serif {
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+}
+
+.font-script {
+  font-family: var(--font-script), "Alex Brush", cursive;
+}
+
+.editorial-kicker {
+  font-family: var(--font-sans);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--sand);
+}
+
+.editorial-title {
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--warm-ivory-light);
+}
+
+.editorial-serif {
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  letter-spacing: -0.015em;
+  color: var(--warm-ivory-light);
+}
+
+.editorial-script {
+  font-family: var(--font-script), "Alex Brush", cursive;
+  font-weight: 400;
+  color: var(--sand);
+  letter-spacing: 0.02em;
+}
+
+/* Scrollbar polish */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(25, 32, 36, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(219, 211, 193, 0.16);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(213, 179, 139, 0.32);
 }

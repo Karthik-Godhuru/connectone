@@ -26,6 +26,7 @@ Beyond matching, ConnectOne transforms raw onboarding profiles into structured i
 - **Curated Opportunities**: Prototype discovery architecture scoring hackathons, internships, fellowships, and research grants calibrated to stage and target skills.
 - **Central Product Dashboard**: Information-dense, executive overview with welcome metrics, profile progress tracking, tactical next action banners, and collaborator previews.
 - **Dedicated Profile Management**: Safe view and edit interface for personal info, aspirational goals, skills, interests, and portfolio works.
+- **ConnectOne AI Companion**: Context-aware career and collaboration advisor powered by Google Gemini 3.8 Flash with verified tool calling for live teammate matching, roadmap progress, opportunity searches, and safe navigation guidance.
 
 ---
 
@@ -137,6 +138,7 @@ When deploying to Vercel, configure the following environment variables in the p
 - `/intelligence` — Deep AI Profile Intelligence report
 - `/status` — System health and database connectivity diagnostics
 - `/api/health` — JSON health check endpoint
+- `/api/companion/chat` — Authenticated conversational AI companion endpoint
 
 ---
 

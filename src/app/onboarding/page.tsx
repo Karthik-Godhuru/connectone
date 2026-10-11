@@ -232,15 +232,19 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="relative mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+      {/* Ambient background glows */}
+      <div className="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 h-80 w-80 rounded-full bg-[#4E1F1A]/20 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-10 right-10 h-72 w-72 rounded-full bg-[#9E532D]/15 blur-3xl" />
+
       {/* Step Indicator Header */}
-      <div className="mb-8">
+      <div className="relative mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-wider text-blue-400">
+            <span className="editorial-kicker text-[#D5B38B]">
               Profile Setup · Step {currentStep} of {totalSteps}
             </span>
-            <h1 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <h1 className="font-serif mt-1 text-2xl font-normal tracking-tight text-[#DBD3C1] sm:text-3xl">
               {currentStep === 1 && "Identity & Career Domain"}
               {currentStep === 2 && "Skills & Interests"}
               {currentStep === 3 && "Projects & Works"}
@@ -248,16 +252,16 @@ export default function OnboardingPage() {
               {currentStep === 5 && "Review & AI Readiness"}
             </h1>
           </div>
-          <div className="hidden items-center gap-1 sm:flex">
+          <div className="hidden items-center gap-1.5 sm:flex">
             {Array.from({ length: totalSteps }).map((_, i) => (
               <div
                 key={i}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
+                className={`h-2 rounded-full transition-all duration-300 ${
                   i + 1 === currentStep
-                    ? "w-8 bg-blue-500"
+                    ? "w-8 bg-gradient-to-r from-[#9E532D] to-[#D5B38B] shadow-sm shadow-[#9E532D]/40"
                     : i + 1 < currentStep
-                    ? "w-2.5 bg-emerald-500"
-                    : "w-2.5 bg-slate-800"
+                    ? "w-2 bg-[#D5B38B]"
+                    : "w-2 bg-[#DBD3C1]/20"
                 }`}
               />
             ))}
@@ -265,32 +269,32 @@ export default function OnboardingPage() {
         </div>
 
         {/* Mobile progress bar */}
-        <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-slate-800 sm:hidden">
+        <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-[#DBD3C1]/10 sm:hidden">
           <div
-            className="h-full bg-blue-500 transition-all duration-300"
+            className="h-full bg-gradient-to-r from-[#9E532D] to-[#D5B38B] transition-all duration-300"
             style={{ width: `${(currentStep / totalSteps) * 100}%` }}
           />
         </div>
       </div>
 
       {errorMessage && (
-        <div className="mb-6 flex items-start gap-3 rounded-xl border border-rose-500/30 bg-rose-500/10 p-4 text-xs text-rose-300">
+        <div className="relative mb-6 flex items-start gap-3 rounded-2xl border border-rose-500/30 bg-rose-950/25 p-4 text-xs text-rose-200 backdrop-blur-md shadow-lg">
           <AlertCircle className="h-4 w-4 shrink-0 text-rose-400 mt-0.5" />
           <span>{errorMessage}</span>
         </div>
       )}
 
       {/* Step Content Box */}
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-xl backdrop-blur-xl sm:p-8">
+      <div className="glass-panel relative rounded-3xl border border-[#DBD3C1]/15 bg-[#192024]/85 p-6 sm:p-9 shadow-2xl backdrop-blur-2xl">
         {/* ================= STEP 1: Personal & Career ================= */}
         {currentStep === 1 && (
           <div className="space-y-6">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#D5B38B]">
                 Full Name *
               </label>
               <div className="relative mt-2">
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#DBD3C1]/50">
                   <User className="h-4 w-4" />
                 </div>
                 <input
@@ -299,35 +303,35 @@ export default function OnboardingPage() {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="e.g. Alex Morgan"
-                  className="block w-full rounded-xl border border-slate-800 bg-slate-950 py-3 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className="glass-input block w-full rounded-xl py-3 pl-10 pr-4 text-sm text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none focus:ring-1 focus:ring-[#D5B38B] transition"
                 />
               </div>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#D5B38B]">
                   Date of Birth
                 </label>
                 <div className="relative mt-2">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#DBD3C1]/50">
                     <Calendar className="h-4 w-4" />
                   </div>
                   <input
                     type="date"
                     value={dateOfBirth}
                     onChange={(e) => setDateOfBirth(e.target.value)}
-                    className="block w-full rounded-xl border border-slate-800 bg-slate-950 py-3 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    className="glass-input block w-full rounded-xl py-3 pl-10 pr-4 text-sm text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none focus:ring-1 focus:ring-[#D5B38B] transition"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#D5B38B]">
                   Education / University
                 </label>
                 <div className="relative mt-2">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#DBD3C1]/50">
                     <GraduationCap className="h-4 w-4" />
                   </div>
                   <input
@@ -335,27 +339,27 @@ export default function OnboardingPage() {
                     value={education}
                     onChange={(e) => setEducation(e.target.value)}
                     placeholder="e.g. B.Tech Computer Science / Self-Taught"
-                    className="block w-full rounded-xl border border-slate-800 bg-slate-950 py-3 pl-10 pr-4 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    className="glass-input block w-full rounded-xl py-3 pl-10 pr-4 text-sm text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none focus:ring-1 focus:ring-[#D5B38B] transition"
                   />
                 </div>
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#D5B38B]">
                 Primary Career Domain * (Not limited to tech)
               </label>
               <div className="relative mt-2">
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#DBD3C1]/50">
                   <Briefcase className="h-4 w-4" />
                 </div>
                 <select
                   value={selectedDomain}
                   onChange={(e) => setSelectedDomain(e.target.value)}
-                  className="block w-full rounded-xl border border-slate-800 bg-slate-950 py-3 pl-10 pr-4 text-sm text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className="glass-input block w-full rounded-xl py-3 pl-10 pr-4 text-sm text-[#DBD3C1] focus:border-[#D5B38B] focus:outline-none focus:ring-1 focus:ring-[#D5B38B] transition"
                 >
                   {CAREER_DOMAINS.map((domain) => (
-                    <option key={domain} value={domain} className="bg-slate-950 text-white">
+                    <option key={domain} value={domain} className="bg-[#192024] text-[#DBD3C1]">
                       {domain}
                     </option>
                   ))}
@@ -369,14 +373,14 @@ export default function OnboardingPage() {
                     value={customDomain}
                     onChange={(e) => setCustomDomain(e.target.value)}
                     placeholder="Specify your unique domain (e.g. Bioengineering, Film, Architecture)"
-                    className="block w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+                    className="glass-input block w-full rounded-xl p-3 text-sm text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none"
                   />
                 </div>
               )}
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#D5B38B]">
                 Bio / About Me
               </label>
               <textarea
@@ -384,7 +388,7 @@ export default function OnboardingPage() {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="Share a short summary of who you are, what drives you, and what kind of projects you love to build..."
-                className="mt-2 block w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="glass-input mt-2 block w-full rounded-xl p-3 text-sm text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none focus:ring-1 focus:ring-[#D5B38B] transition"
               />
             </div>
           </div>
@@ -397,10 +401,10 @@ export default function OnboardingPage() {
             <div>
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-sm font-bold text-white">Your Skills & Proficiencies</h3>
-                  <p className="text-xs text-slate-400">Add technical or creative talents</p>
+                  <h3 className="text-sm font-bold text-[#DBD3C1]">Your Skills &amp; Proficiencies</h3>
+                  <p className="text-xs text-[#8FAAB5]">Add technical or creative talents</p>
                 </div>
-                <span className="text-xs text-blue-400">{skills.length} added</span>
+                <span className="glass-pill px-2.5 py-0.5 text-xs text-[#D5B38B] font-semibold">{skills.length} added</span>
               </div>
 
               <div className="mt-3 flex flex-col gap-2 sm:flex-row">
@@ -415,24 +419,24 @@ export default function OnboardingPage() {
                     }
                   }}
                   placeholder="e.g. Python, Figma, 3D Modeling"
-                  className="flex-1 rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+                  className="glass-input flex-1 rounded-xl px-3.5 py-2.5 text-sm text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none"
                 />
                 <select
                   value={newSkillLevel}
                   onChange={(e) =>
                     setNewSkillLevel(e.target.value as SkillItem["proficiencyLevel"])
                   }
-                  className="rounded-xl border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-white focus:border-blue-500 focus:outline-none"
+                  className="glass-input rounded-xl px-3.5 py-2.5 text-sm text-[#DBD3C1] focus:border-[#D5B38B] focus:outline-none"
                 >
-                  <option value="Beginner">Beginner</option>
-                  <option value="Intermediate">Intermediate</option>
-                  <option value="Advanced">Advanced</option>
-                  <option value="Expert">Expert</option>
+                  <option value="Beginner" className="bg-[#192024]">Beginner</option>
+                  <option value="Intermediate" className="bg-[#192024]">Intermediate</option>
+                  <option value="Advanced" className="bg-[#192024]">Advanced</option>
+                  <option value="Expert" className="bg-[#192024]">Expert</option>
                 </select>
                 <button
                   type="button"
                   onClick={() => handleAddSkill()}
-                  className="inline-flex items-center justify-center gap-1 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-blue-500"
+                  className="glass-button-primary inline-flex items-center justify-center gap-1 rounded-xl px-4 py-2.5 text-xs font-semibold text-white shadow-md shadow-[#9E532D]/20"
                 >
                   <Plus className="h-4 w-4" />
                   Add
@@ -441,13 +445,13 @@ export default function OnboardingPage() {
 
               {/* Quick suggestions */}
               <div className="mt-3 flex flex-wrap items-center gap-1.5 text-xs">
-                <span className="text-slate-500 text-[11px]">Suggestions:</span>
+                <span className="text-[#8FAAB5] text-[11px]">Suggestions:</span>
                 {SUGGESTED_SKILLS.slice(0, 6).map((item) => (
                   <button
                     key={item}
                     type="button"
                     onClick={() => handleAddSkill(item)}
-                    className="rounded-lg border border-slate-800 bg-slate-950/80 px-2 py-0.5 text-[11px] text-slate-400 transition hover:border-slate-700 hover:text-white"
+                    className="glass-pill rounded-lg px-2.5 py-1 text-[11px] text-[#8FAAB5] transition hover:text-[#DBD3C1]"
                   >
                     + {item}
                   </button>
@@ -459,16 +463,16 @@ export default function OnboardingPage() {
                 {skills.map((skill, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-950 px-3 py-1.5 text-xs text-white"
+                    className="inline-flex items-center gap-2 rounded-xl border border-[#DBD3C1]/15 bg-[#192024]/60 px-3 py-1.5 text-xs text-[#DBD3C1] backdrop-blur-md"
                   >
                     <span className="font-medium">{skill.name}</span>
-                    <span className="rounded bg-slate-800 px-1.5 py-0.5 text-[10px] text-blue-400">
+                    <span className="rounded bg-[#DBD3C1]/10 px-1.5 py-0.5 text-[10px] text-[#D5B38B]">
                       {skill.proficiencyLevel}
                     </span>
                     <button
                       type="button"
                       onClick={() => handleRemoveSkill(idx)}
-                      className="text-slate-500 hover:text-rose-400"
+                      className="text-[#8FAAB5] hover:text-rose-400 transition"
                     >
                       <Trash2 className="h-3 w-3" />
                     </button>
@@ -478,13 +482,13 @@ export default function OnboardingPage() {
             </div>
 
             {/* Interests */}
-            <div className="border-t border-slate-800/80 pt-6">
+            <div className="border-t border-[#DBD3C1]/10 pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-sm font-bold text-white">Domains of Interest</h3>
-                  <p className="text-xs text-slate-400">Topics you are excited to explore</p>
+                  <h3 className="text-sm font-bold text-[#DBD3C1]">Domains of Interest</h3>
+                  <p className="text-xs text-[#8FAAB5]">Topics you are excited to explore</p>
                 </div>
-                <span className="text-xs text-indigo-400">{interests.length} added</span>
+                <span className="glass-pill px-2.5 py-0.5 text-xs text-[#B86539] font-semibold">{interests.length} added</span>
               </div>
 
               <div className="mt-3 flex gap-2">
@@ -499,12 +503,12 @@ export default function OnboardingPage() {
                     }
                   }}
                   placeholder="e.g. Hackathons, Sustainability, Generative AI"
-                  className="flex-1 rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                  className="glass-input flex-1 rounded-xl px-3.5 py-2.5 text-sm text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none"
                 />
                 <button
                   type="button"
                   onClick={() => handleAddInterest()}
-                  className="inline-flex items-center justify-center gap-1 rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-indigo-500"
+                  className="inline-flex items-center justify-center gap-1 rounded-xl bg-gradient-to-r from-[#9E532D] to-[#B86539] px-4 py-2.5 text-xs font-semibold text-white shadow-md shadow-[#9E532D]/20 transition hover:opacity-90"
                 >
                   <Plus className="h-4 w-4" />
                   Add
@@ -513,13 +517,13 @@ export default function OnboardingPage() {
 
               {/* Suggestions */}
               <div className="mt-3 flex flex-wrap items-center gap-1.5 text-xs">
-                <span className="text-slate-500 text-[11px]">Suggestions:</span>
+                <span className="text-[#8FAAB5] text-[11px]">Suggestions:</span>
                 {SUGGESTED_INTERESTS.slice(0, 6).map((item) => (
                   <button
                     key={item}
                     type="button"
                     onClick={() => handleAddInterest(item)}
-                    className="rounded-lg border border-slate-800 bg-slate-950/80 px-2 py-0.5 text-[11px] text-slate-400 transition hover:border-slate-700 hover:text-white"
+                    className="glass-pill rounded-lg px-2.5 py-1 text-[11px] text-[#8FAAB5] transition hover:text-[#DBD3C1]"
                   >
                     + {item}
                   </button>
@@ -531,13 +535,13 @@ export default function OnboardingPage() {
                 {interests.map((int, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-950 px-3 py-1.5 text-xs text-indigo-300"
+                    className="inline-flex items-center gap-2 rounded-xl border border-[#DBD3C1]/15 bg-[#192024]/60 px-3 py-1.5 text-xs text-[#DBD3C1] backdrop-blur-md"
                   >
                     <span>{int}</span>
                     <button
                       type="button"
                       onClick={() => handleRemoveInterest(idx)}
-                      className="text-slate-500 hover:text-rose-400"
+                      className="text-[#8FAAB5] hover:text-rose-400 transition"
                     >
                       <Trash2 className="h-3 w-3" />
                     </button>
@@ -554,29 +558,29 @@ export default function OnboardingPage() {
             <div>
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-sm font-bold text-white">Showcase Your Projects</h3>
-                  <p className="text-xs text-slate-400">
+                  <h3 className="text-sm font-bold text-[#DBD3C1]">Showcase Your Projects</h3>
+                  <p className="text-xs text-[#8FAAB5]">
                     Add prior builds, prototypes, or hackathon concepts (Optional)
                   </p>
                 </div>
-                <span className="text-xs text-cyan-400">{projects.length} added</span>
+                <span className="glass-pill px-2.5 py-0.5 text-xs text-[#D5B38B] font-semibold">{projects.length} added</span>
               </div>
             </div>
 
-            <div className="space-y-3 rounded-xl border border-slate-800/80 bg-slate-950/60 p-4">
+            <div className="space-y-3 rounded-2xl border border-[#DBD3C1]/10 bg-[#192024]/40 p-4 sm:p-5 backdrop-blur-md">
               <input
                 type="text"
                 value={projTitle}
                 onChange={(e) => setProjTitle(e.target.value)}
                 placeholder="Project Title (e.g. DevConnect AI)"
-                className="block w-full rounded-lg border border-slate-800 bg-slate-900 p-2.5 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+                className="glass-input block w-full rounded-xl p-3 text-sm text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none"
               />
               <textarea
                 rows={2}
                 value={projDesc}
                 onChange={(e) => setProjDesc(e.target.value)}
                 placeholder="Brief description of the problem solved and core features..."
-                className="block w-full rounded-lg border border-slate-800 bg-slate-900 p-2.5 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+                className="glass-input block w-full rounded-xl p-3 text-sm text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none"
               />
               <div className="grid gap-3 sm:grid-cols-2">
                 <input
@@ -584,14 +588,14 @@ export default function OnboardingPage() {
                   value={projRepo}
                   onChange={(e) => setProjRepo(e.target.value)}
                   placeholder="GitHub Repository URL (Optional)"
-                  className="block w-full rounded-lg border border-slate-800 bg-slate-900 p-2 text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+                  className="glass-input block w-full rounded-xl p-2.5 text-xs text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none"
                 />
                 <input
                   type="url"
                   value={projDemo}
                   onChange={(e) => setProjDemo(e.target.value)}
                   placeholder="Live Demo / Website URL (Optional)"
-                  className="block w-full rounded-lg border border-slate-800 bg-slate-900 p-2 text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+                  className="glass-input block w-full rounded-xl p-2.5 text-xs text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none"
                 />
               </div>
               <input
@@ -599,14 +603,14 @@ export default function OnboardingPage() {
                 value={projTags}
                 onChange={(e) => setProjTags(e.target.value)}
                 placeholder="Tags separated by commas (e.g. Next.js, Supabase, Tailwind)"
-                className="block w-full rounded-lg border border-slate-800 bg-slate-900 p-2 text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+                className="glass-input block w-full rounded-xl p-2.5 text-xs text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none"
               />
               <div className="flex justify-end pt-2">
                 <button
                   type="button"
                   onClick={handleAddProject}
                   disabled={!projTitle.trim()}
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3.5 py-1.5 text-xs font-semibold text-white transition hover:bg-blue-500 disabled:opacity-40"
+                  className="glass-button-primary inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-semibold text-white shadow-md shadow-[#9E532D]/20 disabled:opacity-40"
                 >
                   <FolderPlus className="h-3.5 w-3.5" />
                   Add Project
@@ -620,19 +624,19 @@ export default function OnboardingPage() {
                 {projects.map((proj, idx) => (
                   <div
                     key={idx}
-                    className="flex items-start justify-between rounded-xl border border-slate-800 bg-slate-950 p-4 text-xs"
+                    className="flex items-start justify-between rounded-xl border border-[#DBD3C1]/10 bg-[#192024]/50 p-4 text-xs backdrop-blur-md"
                   >
                     <div>
-                      <h4 className="font-bold text-white text-sm">{proj.title}</h4>
+                      <h4 className="font-bold text-[#DBD3C1] text-sm">{proj.title}</h4>
                       {proj.description && (
-                        <p className="mt-1 text-slate-400">{proj.description}</p>
+                        <p className="mt-1 text-[#DBD3C1]/75">{proj.description}</p>
                       )}
                       {proj.tags && proj.tags.length > 0 && (
                         <div className="mt-2 flex flex-wrap gap-1">
                           {proj.tags.map((t, i) => (
                             <span
                               key={i}
-                              className="rounded bg-slate-900 px-2 py-0.5 text-[10px] text-slate-300"
+                              className="rounded-md border border-[#DBD3C1]/10 bg-[#DBD3C1]/5 px-2 py-0.5 text-[10px] text-[#8FAAB5]"
                             >
                               {t}
                             </span>
@@ -643,7 +647,7 @@ export default function OnboardingPage() {
                     <button
                       type="button"
                       onClick={() => handleRemoveProject(idx)}
-                      className="text-slate-500 hover:text-rose-400"
+                      className="text-[#8FAAB5] hover:text-rose-400 transition"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -651,7 +655,7 @@ export default function OnboardingPage() {
                 ))}
               </div>
             ) : (
-              <div className="rounded-xl border border-dashed border-slate-800 p-6 text-center text-xs text-slate-500">
+              <div className="rounded-2xl border border-dashed border-[#DBD3C1]/15 p-6 text-center text-xs text-[#8FAAB5]">
                 No projects added yet. You can add projects later anytime from your dashboard.
               </div>
             )}
@@ -662,15 +666,15 @@ export default function OnboardingPage() {
         {currentStep === 4 && (
           <div className="space-y-6">
             <div>
-              <h3 className="text-sm font-bold text-white">Your Growth Aspirations</h3>
-              <p className="text-xs text-slate-400">
+              <h3 className="text-sm font-bold text-[#DBD3C1]">Your Growth Aspirations</h3>
+              <p className="text-xs text-[#8FAAB5]">
                 These goals guide AI matchmaking and personalized career roadmap milestones.
               </p>
             </div>
 
             <div>
-              <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-300">
-                <Target className="h-3.5 w-3.5 text-blue-400" />
+              <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#D5B38B]">
+                <Target className="h-3.5 w-3.5 text-[#D5B38B]" />
                 Primary Goal *
               </label>
               <input
@@ -679,27 +683,27 @@ export default function OnboardingPage() {
                 value={primaryGoal}
                 onChange={(e) => setPrimaryGoal(e.target.value)}
                 placeholder="e.g. Find complementary teammates to win upcoming AI hackathon"
-                className="mt-2 block w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+                className="glass-input mt-2 block w-full rounded-xl p-3 text-sm text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#D5B38B] focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-300">
-                <Target className="h-3.5 w-3.5 text-indigo-400" />
+              <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#B86539]">
+                <Target className="h-3.5 w-3.5 text-[#B86539]" />
                 Secondary Goal
               </label>
               <input
                 type="text"
                 value={secondaryGoal}
                 onChange={(e) => setSecondaryGoal(e.target.value)}
-                placeholder="e.g. Master fullstack AI development & vector databases"
-                className="mt-2 block w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                placeholder="e.g. Master fullstack AI development &amp; vector databases"
+                className="glass-input mt-2 block w-full rounded-xl p-3 text-sm text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#B86539] focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-300">
-                <Target className="h-3.5 w-3.5 text-cyan-400" />
+              <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#8FAAB5]">
+                <Target className="h-3.5 w-3.5 text-[#8FAAB5]" />
                 Tertiary Goal
               </label>
               <input
@@ -707,7 +711,7 @@ export default function OnboardingPage() {
                 value={tertiaryGoal}
                 onChange={(e) => setTertiaryGoal(e.target.value)}
                 placeholder="e.g. Launch a public venture or secure internship in 2026"
-                className="mt-2 block w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none"
+                className="glass-input mt-2 block w-full rounded-xl p-3 text-sm text-[#DBD3C1] placeholder-[#DBD3C1]/35 focus:border-[#8FAAB5] focus:outline-none"
               />
             </div>
           </div>
@@ -716,52 +720,52 @@ export default function OnboardingPage() {
         {/* ================= STEP 5: Review & AI Hook ================= */}
         {currentStep === 5 && (
           <div className="space-y-6">
-            <div className="rounded-xl border border-blue-500/30 bg-blue-500/10 p-5">
+            <div className="rounded-2xl border border-[#9E532D]/30 bg-[#9E532D]/10 p-5 backdrop-blur-xl">
               <div className="flex items-start gap-3">
-                <Sparkles className="h-5 w-5 shrink-0 text-blue-400 mt-0.5" />
+                <Sparkles className="h-5 w-5 shrink-0 text-[#D5B38B] mt-0.5" />
                 <div>
-                  <h3 className="text-sm font-bold text-white">AI Profile Architecture Ready</h3>
-                  <p className="mt-1 text-xs text-slate-300 leading-relaxed">
+                  <h3 className="text-sm font-bold text-[#DBD3C1]">AI Profile Architecture Ready</h3>
+                  <p className="mt-1 text-xs text-[#DBD3C1]/80 leading-relaxed">
                     Your skills, interests, and aspirations are structured to feed directly into the
-                    ConnectOne AI Matchmaking & Roadmap Engine once activated.
+                    ConnectOne AI Matchmaking &amp; Roadmap Engine once activated.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-xl border border-slate-800 bg-slate-950 p-5 space-y-4 text-xs">
-              <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
-                <span className="text-slate-400">Full Name</span>
-                <span className="font-semibold text-white">{fullName}</span>
+            <div className="glass-card rounded-2xl border border-[#DBD3C1]/10 bg-[#20282D]/70 p-5 space-y-4 text-xs backdrop-blur-xl">
+              <div className="flex items-center justify-between border-b border-[#DBD3C1]/10 pb-3">
+                <span className="text-[#8FAAB5]">Full Name</span>
+                <span className="font-semibold text-[#DBD3C1]">{fullName}</span>
               </div>
-              <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
-                <span className="text-slate-400">Career Domain</span>
-                <span className="font-semibold text-blue-400">{effectiveDomain}</span>
+              <div className="flex items-center justify-between border-b border-[#DBD3C1]/10 pb-3">
+                <span className="text-[#8FAAB5]">Career Domain</span>
+                <span className="font-semibold text-[#D5B38B]">{effectiveDomain}</span>
               </div>
-              <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
-                <span className="text-slate-400">Education</span>
-                <span className="text-white">{education || "Not specified"}</span>
+              <div className="flex items-center justify-between border-b border-[#DBD3C1]/10 pb-3">
+                <span className="text-[#8FAAB5]">Education</span>
+                <span className="text-[#DBD3C1]">{education || "Not specified"}</span>
               </div>
-              <div className="border-b border-slate-800/80 pb-3">
-                <span className="text-slate-400 block mb-1">Skills ({skills.length})</span>
+              <div className="border-b border-[#DBD3C1]/10 pb-3">
+                <span className="text-[#8FAAB5] block mb-1">Skills ({skills.length})</span>
                 <div className="flex flex-wrap gap-1.5">
                   {skills.map((s, i) => (
                     <span
                       key={i}
-                      className="rounded bg-slate-900 px-2 py-0.5 text-[11px] text-slate-300"
+                      className="rounded-lg border border-[#DBD3C1]/15 bg-[#192024]/60 px-2.5 py-1 text-[11px] text-[#DBD3C1]"
                     >
                       {s.name} ({s.proficiencyLevel})
                     </span>
                   ))}
                 </div>
               </div>
-              <div className="border-b border-slate-800/80 pb-3">
-                <span className="text-slate-400 block mb-1">Interests ({interests.length})</span>
+              <div className="border-b border-[#DBD3C1]/10 pb-3">
+                <span className="text-[#8FAAB5] block mb-1">Interests ({interests.length})</span>
                 <div className="flex flex-wrap gap-1.5">
                   {interests.map((it, i) => (
                     <span
                       key={i}
-                      className="rounded bg-slate-900 px-2 py-0.5 text-[11px] text-indigo-300"
+                      className="rounded-lg border border-[#DBD3C1]/15 bg-[#192024]/60 px-2.5 py-1 text-[11px] text-[#DBD3C1]"
                     >
                       {it}
                     </span>
@@ -769,14 +773,14 @@ export default function OnboardingPage() {
                 </div>
               </div>
               <div>
-                <span className="text-slate-400 block mb-1">Primary Goal</span>
-                <p className="text-white">{primaryGoal}</p>
+                <span className="text-[#8FAAB5] block mb-1">Primary Goal</span>
+                <p className="text-[#DBD3C1]">{primaryGoal}</p>
               </div>
             </div>
 
-            <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4 text-[11px] text-slate-500">
+            <div className="rounded-xl border border-[#DBD3C1]/10 bg-[#192024]/40 p-4 text-[11px] text-[#8FAAB5]">
               <div className="flex items-center gap-2">
-                <Layers className="h-3.5 w-3.5 text-blue-400" />
+                <Layers className="h-3.5 w-3.5 text-[#D5B38B]" />
                 <span>Saving into tables: profiles, skills, user_skills, interests, user_interests, projects.</span>
               </div>
             </div>
@@ -784,13 +788,13 @@ export default function OnboardingPage() {
         )}
 
         {/* Step Navigation Buttons */}
-        <div className="mt-8 flex items-center justify-between border-t border-slate-800/80 pt-6">
+        <div className="mt-8 flex items-center justify-between border-t border-[#DBD3C1]/10 pt-6">
           {currentStep > 1 ? (
             <button
               type="button"
               onClick={prevStep}
               disabled={isSubmitting}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-800 bg-slate-900 px-4 py-2.5 text-xs font-semibold text-slate-300 transition hover:border-slate-700 hover:text-white"
+              className="glass-button-secondary inline-flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-semibold text-[#DBD3C1]/70"
             >
               <ArrowLeft className="h-4 w-4" />
               Back
@@ -803,7 +807,7 @@ export default function OnboardingPage() {
             <button
               type="button"
               onClick={nextStep}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white shadow-md shadow-blue-500/20 transition hover:bg-blue-500"
+              className="glass-button-primary inline-flex items-center gap-1.5 rounded-xl px-5 py-2.5 text-xs font-semibold text-white shadow-lg shadow-[#9E532D]/20"
             >
               Continue
               <ArrowRight className="h-4 w-4" />
@@ -813,11 +817,11 @@ export default function OnboardingPage() {
               type="button"
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-2.5 text-xs font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+              className="glass-button-primary inline-flex items-center gap-2 rounded-xl px-6 py-2.5 text-xs font-semibold text-white shadow-xl shadow-[#9E532D]/30 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
+                  <Loader2 className="h-4 w-4 animate-spin text-[#D5B38B]" />
                   <span>Saving Profile to Supabase...</span>
                 </>
               ) : (

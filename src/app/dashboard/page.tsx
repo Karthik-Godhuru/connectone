@@ -20,7 +20,10 @@ import {
   ChevronRight,
   LogOut,
   FolderGit2,
+  Bot,
+  Zap,
 } from "lucide-react";
+import { CompanionDashboardSection } from "@/components/companion/companion-dashboard-section";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -170,26 +173,31 @@ export default async function DashboardPage() {
     .filter(Boolean);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
-      {/* Top Bar with Profile Overview & CTAs */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-6 sm:p-8 backdrop-blur-sm">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-7">
+      {/* Top Header with Profile Overview & CTAs */}
+      <div className="glass-panel rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+        {/* Subtle radial glow illumination */}
+        <div className="absolute top-0 right-0 w-96 h-48 bg-gradient-to-bl from-[#4E1F1A]/22 via-[#9E532D]/10 to-transparent blur-3xl pointer-events-none" />
+
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between relative z-10">
           <div className="flex items-start gap-4">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-slate-800 text-lg font-bold text-white border border-slate-700">
-              {profile.full_name.charAt(0).toUpperCase()}
+            <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#9E532D]/25 via-[#4E1F1A]/20 to-[#D5B38B]/20 border border-[#DBD3C1]/12 shadow-[0_0_24px_rgba(158,83,45,0.2)]">
+              <span className="text-xl font-black bg-gradient-to-br from-[#F4EFE6] to-[#D5B38B] bg-clip-text text-transparent">
+                {profile.full_name.charAt(0).toUpperCase()}
+              </span>
             </div>
             <div>
-              <div className="flex items-center gap-2.5">
-                <h1 className="text-xl font-bold text-white sm:text-2xl">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <h1 className="font-serif text-2xl font-medium tracking-tight text-[#DBD3C1] sm:text-3xl">
                   {profile.full_name}
                 </h1>
-                <span className="rounded border border-slate-700 bg-slate-800 px-2 py-0.5 text-[11px] font-medium text-slate-300">
+                <span className="glass-pill rounded-full px-2.5 py-0.5 text-[10px] font-semibold text-[#D5B38B] uppercase tracking-wider">
                   {profile.career_domain || "Member"}
                 </span>
               </div>
-              <p className="mt-1 text-xs text-slate-400">
+              <p className="mt-1 text-xs text-[#8FAAB5]">
                 Primary Goal:{" "}
-                <span className="text-slate-200 font-medium">
+                <span className="text-[#DBD3C1] font-medium">
                   {profile.primary_goal || "Not specified"}
                 </span>
               </p>
@@ -200,81 +208,82 @@ export default async function DashboardPage() {
           <div className="flex flex-wrap items-center gap-2">
             <Link
               href="/discover"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue-500"
+              className="glass-button-primary inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-semibold shadow-lg shadow-[#9E532D]/20"
             >
               <Users className="h-3.5 w-3.5" />
               <span>Discover People</span>
             </Link>
             <Link
               href="/roadmap"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:bg-slate-700 hover:text-white"
+              className="glass-button-secondary inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-medium"
             >
-              <Compass className="h-3.5 w-3.5 text-slate-400" />
+              <Compass className="h-3.5 w-3.5 text-[#D5B38B]" />
               <span>Career Roadmap</span>
             </Link>
             <Link
               href="/opportunities"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:bg-slate-700 hover:text-white"
+              className="glass-button-secondary inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-medium"
             >
-              <Award className="h-3.5 w-3.5 text-slate-400" />
+              <Award className="h-3.5 w-3.5 text-[#D5B38B]" />
               <span>Opportunities</span>
             </Link>
             <Link
               href="/profile"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:bg-slate-700 hover:text-white"
+              className="glass-button-secondary inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-medium"
             >
-              <User className="h-3.5 w-3.5 text-slate-400" />
-              <span>Edit Profile</span>
+              <User className="h-3.5 w-3.5 text-[#8FAAB5]" />
+              <span>Profile</span>
             </Link>
             <form action={signOutAction}>
               <button
                 type="submit"
-                className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-400 transition hover:bg-rose-950/30 hover:border-rose-800/50 hover:text-rose-300"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-[#DBD3C1]/10 bg-[#252E33]/30 px-3 py-2 text-xs font-medium text-[#8FAAB5] transition hover:border-rose-500/40 hover:bg-rose-950/20 hover:text-rose-300"
                 title="Sign out of ConnectOne"
               >
                 <LogOut className="h-3.5 w-3.5" />
-                <span>Sign Out</span>
+                <span className="hidden sm:inline">Sign Out</span>
               </button>
             </form>
           </div>
         </div>
 
         {/* Profile Completion Bar */}
-        <div className="mt-6 border-t border-slate-800/80 pt-4 flex flex-wrap items-center justify-between gap-4 text-xs">
+        <div className="mt-6 border-t border-[#DBD3C1]/10 pt-4 flex flex-wrap items-center justify-between gap-4 text-xs relative z-10">
           <div className="flex items-center gap-3">
-            <span className="text-slate-400">Profile Progress:</span>
-            <div className="h-2 w-36 overflow-hidden rounded-full bg-slate-950 border border-slate-800">
+            <span className="text-[#8FAAB5] text-xs">Profile Calibration:</span>
+            <div className="h-2 w-40 overflow-hidden rounded-full bg-[#192024] border border-[#DBD3C1]/10 p-[1px]">
               <div
-                className="h-full bg-blue-600 transition-all"
+                className="h-full bg-gradient-to-r from-[#9E532D] to-[#D5B38B] rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(213,179,139,0.3)]"
                 style={{ width: `${profileCompletion}%` }}
               />
             </div>
-            <span className="font-semibold text-white">{profileCompletion}%</span>
+            <span className="font-bold text-[#DBD3C1] tabular-nums">{profileCompletion}%</span>
           </div>
 
           {profileCompletion < 100 && (
-            <Link href="/profile" className="text-xs text-blue-400 hover:underline">
-              Complete your profile for higher matching accuracy →
+            <Link href="/profile" className="text-xs text-[#D5B38B] hover:text-[#E4C8A6] flex items-center gap-1">
+              <span>Complete profile for higher matching accuracy</span>
+              <ArrowRight className="h-3 w-3" />
             </Link>
           )}
         </div>
       </div>
 
       {/* Immediate Next Action Tactical Card */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
+      <div className="glass-card rounded-2xl p-5 border border-[#DBD3C1]/12 bg-gradient-to-r from-[#252E33]/90 via-[#252E33]/70 to-[#9E532D]/12">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
-              <TrendingUp className="h-3.5 w-3.5 text-blue-400" />
-              <span>Next Recommended Action</span>
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5B38B]">
+              <TrendingUp className="h-3.5 w-3.5 text-[#D5B38B]" />
+              <span>Next Recommended Milestone Action</span>
             </div>
-            <p className="text-sm font-semibold text-white sm:text-base">
+            <p className="font-serif text-sm font-medium text-[#DBD3C1] sm:text-base leading-relaxed">
               {nextRecommendedAction}
             </p>
           </div>
           <Link
             href="/roadmap"
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-blue-600 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-blue-500"
+            className="glass-button-primary inline-flex shrink-0 items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-semibold"
           >
             <span>View Roadmap</span>
             <ArrowRight className="h-3.5 w-3.5" />
@@ -282,83 +291,99 @@ export default async function DashboardPage() {
         </div>
       </div>
 
+      {/* ConnectOne AI Companion Interactive Agent Section */}
+      <CompanionDashboardSection
+        userName={profile.full_name}
+        careerDomain={profile.career_domain || "Innovation"}
+      />
+
       {/* 3-Column Information Row: AI Profile Summary, Top Strengths, Goals */}
       <div className="grid gap-6 md:grid-cols-3">
         {/* AI Profile Summary */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-5 flex flex-col justify-between">
+        <div className="glass-card rounded-2xl p-5 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            <div className="flex items-center justify-between border-b border-[#DBD3C1]/08 pb-2.5">
+              <span className="editorial-kicker text-[10px] text-[#8FAAB5]">
                 AI Profile Summary
               </span>
-              <Link href="/intelligence" className="text-xs text-blue-400 hover:underline">
-                Deep Analysis
+              <Link href="/intelligence" className="text-xs font-medium text-[#D5B38B] hover:underline">
+                Deep Analysis →
               </Link>
             </div>
-            <p className="mt-3 text-xs text-slate-300 leading-relaxed">
+            <p className="mt-3 text-xs text-[#DBD3C1]/90 leading-relaxed">
               {profile.bio ||
                 `${profile.full_name} is advancing in ${profile.career_domain || "their specialty"} with an active focus on ${profile.primary_goal || "collaboration"}.`}
             </p>
           </div>
-          <div className="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400 flex justify-between">
+          <div className="mt-4 pt-3 border-t border-[#DBD3C1]/08 text-[11px] text-[#8FAAB5] flex justify-between">
             <span>Domain: {profile.career_domain || "General"}</span>
-            <span className="text-slate-200">Active</span>
+            <span className="text-emerald-400 font-medium flex items-center gap-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              <span>Active</span>
+            </span>
           </div>
         </div>
 
         {/* Top Strengths & Current Skills */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-5 flex flex-col justify-between">
+        <div className="glass-card rounded-2xl p-5 flex flex-col justify-between">
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-              Top Strengths & Skills
-            </span>
-            <p className="mt-1 text-xs text-slate-400">Verified competencies</p>
-            <div className="mt-3 flex flex-wrap gap-1.5">
+            <div className="border-b border-[#DBD3C1]/08 pb-2.5">
+              <span className="editorial-kicker text-[10px] text-[#8FAAB5]">
+                Verified Competencies
+              </span>
+              <p className="text-[11px] text-[#8FAAB5]/70 mt-0.5">Top verified technical & craft skills</p>
+            </div>
+            <div className="mt-3.5 flex flex-wrap gap-1.5">
               {topStrengths.length > 0 ? (
                 topStrengths.map((s, i) => (
                   <span
                     key={i}
-                    className="rounded border border-slate-700 bg-slate-800 px-2 py-0.5 text-xs text-slate-200"
+                    className="glass-pill rounded-lg px-2.5 py-1 text-xs text-[#DBD3C1] font-medium"
                   >
                     {s}
                   </span>
                 ))
               ) : (
-                <p className="text-xs text-slate-500">No skills added yet.</p>
+                <p className="text-xs text-[#8FAAB5]/60 italic py-2">No skills registered yet.</p>
               )}
             </div>
           </div>
-          <div className="mt-4 pt-3 border-t border-slate-800">
-            <Link href="/profile" className="text-xs text-slate-400 hover:text-white">
-              Manage Skills ({userSkills?.length || 0}) →
+          <div className="mt-4 pt-3 border-t border-[#DBD3C1]/08">
+            <Link href="/profile" className="text-xs text-[#D5B38B] hover:text-[#E4C8A6] transition flex items-center justify-between">
+              <span>Manage Skills ({userSkills?.length || 0})</span>
+              <ChevronRight className="h-3.5 w-3.5" />
             </Link>
           </div>
         </div>
 
         {/* Primary Goals */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-5 flex flex-col justify-between">
+        <div className="glass-card rounded-2xl p-5 flex flex-col justify-between">
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-              Primary Aspirations
-            </span>
-            <div className="mt-3 space-y-2 text-xs">
-              <div className="rounded border border-slate-800 bg-slate-950 p-2.5">
-                <span className="text-[10px] font-bold uppercase text-blue-400">Primary</span>
-                <p className="mt-0.5 text-white font-medium">
-                  {profile.primary_goal || "Not set yet"}
+            <div className="border-b border-[#DBD3C1]/08 pb-2.5">
+              <span className="editorial-kicker text-[10px] text-[#8FAAB5]">
+                Strategic Aspirations
+              </span>
+              <p className="text-[11px] text-[#8FAAB5]/70 mt-0.5">Focus areas & vision</p>
+            </div>
+            <div className="mt-3.5 space-y-2 text-xs">
+              <div className="rounded-xl border border-[#DBD3C1]/10 bg-[#192024]/60 p-3">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#D5B38B]">Primary Goal</span>
+                <p className="mt-1 text-[#DBD3C1] font-medium text-xs">
+                  {profile.primary_goal || "Not configured yet"}
                 </p>
               </div>
               {profile.secondary_goal && (
-                <div className="rounded border border-slate-800 bg-slate-950 p-2.5">
-                  <span className="text-[10px] font-bold uppercase text-slate-400">Secondary</span>
-                  <p className="mt-0.5 text-slate-300">{profile.secondary_goal}</p>
+                <div className="rounded-xl border border-[#DBD3C1]/08 bg-[#192024]/40 p-2.5">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#8FAAB5]">Secondary</span>
+                  <p className="mt-0.5 text-[#DBD3C1]/80 text-[11px]">{profile.secondary_goal}</p>
                 </div>
               )}
             </div>
           </div>
-          <div className="mt-4 pt-3 border-t border-slate-800">
-            <Link href="/profile" className="text-xs text-slate-400 hover:text-white">
-              Edit Aspirations →
+          <div className="mt-4 pt-3 border-t border-[#DBD3C1]/08">
+            <Link href="/profile" className="text-xs text-[#D5B38B] hover:text-[#E4C8A6] transition flex items-center justify-between">
+              <span>Edit Aspirations</span>
+              <ChevronRight className="h-3.5 w-3.5" />
             </Link>
           </div>
         </div>
@@ -367,46 +392,49 @@ export default async function DashboardPage() {
       {/* Grid: Roadmap Preview & Opportunities Preview */}
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Career Roadmap Preview */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-6 flex flex-col justify-between">
+        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <div className="flex items-center gap-2">
-                <Compass className="h-4 w-4 text-slate-400" />
-                <h2 className="text-sm font-bold text-white">Career Roadmap</h2>
+            <div className="flex items-center justify-between border-b border-[#DBD3C1]/10 pb-3.5">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#9E532D]/20 text-[#D5B38B]">
+                  <Compass className="h-4 w-4" />
+                </div>
+                <h2 className="font-serif text-base font-medium text-[#DBD3C1]">Career Progression Roadmap</h2>
               </div>
-              <Link href="/roadmap" className="text-xs text-blue-400 hover:underline">
-                View Full Roadmap
+              <Link href="/roadmap" className="text-xs text-[#D5B38B] hover:underline">
+                Full Roadmap →
               </Link>
             </div>
 
             {roadmapRecord ? (
               <div className="mt-4 space-y-3">
-                <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950 p-3 text-xs">
+                <div className="flex items-center justify-between rounded-xl border border-[#DBD3C1]/10 bg-[#192024]/60 p-3.5 text-xs">
                   <div>
-                    <span className="text-[10px] font-bold uppercase text-slate-400">Target Role</span>
-                    <h3 className="font-semibold text-white">{roadmapRecord.target_career || "Career Specialist"}</h3>
+                    <span className="editorial-kicker text-[9px] text-[#8FAAB5]">Target Role</span>
+                    <h3 className="font-semibold text-[#DBD3C1] text-xs">{roadmapRecord.target_career || "Career Specialist"}</h3>
                   </div>
-                  <span className="rounded bg-slate-800 px-2 py-0.5 text-[11px] font-medium text-slate-300">
+                  <span className="glass-pill rounded-full px-2.5 py-0.5 text-[10px] font-semibold text-[#D5B38B]">
                     {roadmapRecord.current_stage || "In Progress"}
                   </span>
                 </div>
 
-                <div className="space-y-1.5">
-                  <span className="text-[10px] font-bold uppercase text-slate-400">
-                    Next Milestones ({completedMilestones}/{totalMilestones})
-                  </span>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-[11px] text-[#8FAAB5]">
+                    <span className="font-semibold">Next Milestones</span>
+                    <span className="tabular-nums">{completedMilestones} of {totalMilestones} Completed</span>
+                  </div>
                   {milestonesList.slice(0, 2).map((m: any, idx: number) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-2.5 rounded-lg border border-slate-800/80 bg-slate-950 p-2.5 text-xs"
+                      className="flex items-start gap-2.5 rounded-xl border border-[#DBD3C1]/08 bg-[#192024]/50 p-3 text-xs"
                     >
-                      <Clock className="h-3.5 w-3.5 text-slate-500 mt-0.5 shrink-0" />
+                      <Clock className="h-3.5 w-3.5 text-[#D5B38B] mt-0.5 shrink-0" />
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
-                          <span className={m.completed ? "line-through text-slate-500" : "font-medium text-white"}>
+                          <span className={m.completed ? "line-through text-[#8FAAB5]/60" : "font-medium text-[#DBD3C1]"}>
                             {m.title}
                           </span>
-                          <span className="text-[10px] text-slate-400">{m.estimated_time}</span>
+                          <span className="text-[10px] text-[#8FAAB5] tabular-nums">{m.estimated_time}</span>
                         </div>
                       </div>
                     </div>
@@ -414,39 +442,41 @@ export default async function DashboardPage() {
                 </div>
               </div>
             ) : (
-              <div className="mt-6 rounded-lg border border-dashed border-slate-800 p-6 text-center">
-                <p className="text-xs text-slate-400">No active roadmap generated yet.</p>
+              <div className="mt-6 rounded-xl border border-dashed border-[#DBD3C1]/15 p-6 text-center">
+                <p className="text-xs text-[#8FAAB5]">No active career roadmap generated yet.</p>
                 <Link
                   href="/roadmap"
-                  className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-blue-500"
+                  className="mt-3.5 glass-button-primary inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-semibold"
                 >
-                  Generate Roadmap
+                  Generate Personalized Roadmap
                 </Link>
               </div>
             )}
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-800">
+          <div className="mt-5 pt-3.5 border-t border-[#DBD3C1]/08">
             <Link
               href="/roadmap"
-              className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 py-2 text-xs font-medium text-slate-200 transition hover:bg-slate-700 hover:text-white"
+              className="glass-button-secondary inline-flex w-full items-center justify-center gap-1.5 rounded-xl py-2.5 text-xs font-medium"
             >
-              <span>Explore Milestones</span>
+              <span>Explore All Milestones</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
         </div>
 
         {/* Opportunity Recommendations Preview */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-6 flex flex-col justify-between">
+        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <div className="flex items-center gap-2">
-                <Award className="h-4 w-4 text-slate-400" />
-                <h2 className="text-sm font-bold text-white">Recommended Opportunities</h2>
+            <div className="flex items-center justify-between border-b border-[#DBD3C1]/10 pb-3.5">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#9E532D]/20 text-[#D5B38B]">
+                  <Award className="h-4 w-4" />
+                </div>
+                <h2 className="font-serif text-base font-medium text-[#DBD3C1]">Recommended Opportunities</h2>
               </div>
-              <Link href="/opportunities" className="text-xs text-blue-400 hover:underline">
-                Explore All
+              <Link href="/opportunities" className="text-xs text-[#D5B38B] hover:underline">
+                Explore All →
               </Link>
             </div>
 
@@ -454,17 +484,17 @@ export default async function DashboardPage() {
               {topOpportunities.map((opp) => (
                 <div
                   key={opp.id}
-                  className="rounded-lg border border-slate-800 bg-slate-950 p-3 transition hover:border-slate-700"
+                  className="rounded-xl border border-[#DBD3C1]/08 bg-[#192024]/60 p-3.5 transition hover:border-[#D5B38B]/30 hover:bg-[#192024]/80"
                 >
-                  <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-start justify-between gap-2.5">
                     <div>
-                      <span className="rounded bg-slate-900 px-1.5 py-0.5 text-[10px] font-medium text-slate-400 border border-slate-800">
+                      <span className="glass-pill rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-[#8FAAB5]">
                         {opp.category}
                       </span>
-                      <h3 className="mt-1 text-xs font-bold text-white">{opp.title}</h3>
-                      <p className="text-[11px] text-slate-400">{opp.organization}</p>
+                      <h3 className="mt-1.5 text-xs font-bold text-[#DBD3C1]">{opp.title}</h3>
+                      <p className="text-[11px] text-[#8FAAB5]">{opp.organization}</p>
                     </div>
-                    <span className="rounded border border-slate-700 bg-slate-800 px-2 py-0.5 text-[10px] font-bold text-white shrink-0">
+                    <span className="rounded-full border border-[#D5B38B]/30 bg-[#D5B38B]/10 px-2.5 py-0.5 text-[10px] font-bold text-[#D5B38B] shrink-0 tabular-nums">
                       {opp.matchScore}% Match
                     </span>
                   </div>
@@ -473,10 +503,10 @@ export default async function DashboardPage() {
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-800">
+          <div className="mt-5 pt-3.5 border-t border-[#DBD3C1]/08">
             <Link
               href="/opportunities"
-              className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 py-2 text-xs font-medium text-slate-200 transition hover:bg-slate-700 hover:text-white"
+              className="glass-button-secondary inline-flex w-full items-center justify-center gap-1.5 rounded-xl py-2.5 text-xs font-medium"
             >
               <span>Browse All Opportunities</span>
               <ArrowRight className="h-3.5 w-3.5" />
@@ -488,54 +518,56 @@ export default async function DashboardPage() {
       {/* Recommended People & Recent Connections Grid */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Recommended People (2 columns) */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-6 lg:col-span-2">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <div className="flex items-center gap-2">
-              <Users className="h-4 w-4 text-slate-400" />
-              <h2 className="text-sm font-bold text-white">Recommended Collaborators</h2>
+        <div className="glass-card rounded-2xl p-6 lg:col-span-2">
+          <div className="flex items-center justify-between border-b border-[#DBD3C1]/10 pb-3.5">
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#9E532D]/20 text-[#D5B38B]">
+                <Users className="h-4 w-4" />
+              </div>
+              <h2 className="font-serif text-base font-medium text-[#DBD3C1]">Recommended Collaborators</h2>
             </div>
-            <Link href="/discover" className="text-xs text-blue-400 hover:underline">
-              View All Matches
+            <Link href="/discover" className="text-xs text-[#D5B38B] hover:underline">
+              View All Matches →
             </Link>
           </div>
 
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <div className="mt-4 grid gap-3.5 sm:grid-cols-2">
             {recommendedPeople.length > 0 ? (
               recommendedPeople.map((match) => (
                 <div
                   key={match.candidate.userId}
-                  className="flex flex-col justify-between rounded-lg border border-slate-800 bg-slate-950 p-4 transition hover:border-slate-700"
+                  className="flex flex-col justify-between rounded-xl border border-[#DBD3C1]/08 bg-[#192024]/60 p-4 transition hover:border-[#D5B38B]/30 hover:bg-[#192024]/80"
                 >
                   <div>
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-2.5">
-                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-800 text-xs font-bold text-white border border-slate-700">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#9E532D]/25 to-[#D5B38B]/20 border border-[#DBD3C1]/10 text-xs font-bold text-[#D5B38B]">
                           {match.candidate.fullName.charAt(0).toUpperCase()}
                         </div>
                         <div>
-                          <h3 className="font-semibold text-white text-xs">
+                          <h3 className="font-semibold text-[#DBD3C1] text-xs">
                             {match.candidate.fullName}
                           </h3>
-                          <p className="text-[11px] text-slate-400">{match.candidate.careerDomain}</p>
+                          <p className="text-[11px] text-[#8FAAB5]">{match.candidate.careerDomain}</p>
                         </div>
                       </div>
-                      <span className="rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 text-[10px] font-bold text-white">
+                      <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-400 tabular-nums">
                         {match.score}%
                       </span>
                     </div>
 
-                    <p className="mt-2 text-[11px] text-slate-300 line-clamp-2 leading-relaxed">
-                      {match.explanation}
+                    <p className="mt-2.5 text-[11px] text-[#8FAAB5] line-clamp-2 leading-relaxed italic">
+                      &ldquo;{match.explanation}&rdquo;
                     </p>
                   </div>
 
-                  <div className="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-xs">
-                    <span className="text-[10px] text-slate-500">
+                  <div className="mt-3.5 pt-2.5 border-t border-[#DBD3C1]/08 flex items-center justify-between text-xs">
+                    <span className="text-[10px] text-[#8FAAB5]/70">
                       {match.candidate.skills.slice(0, 2).map((s: any) => s.name).join(", ")}
                     </span>
                     <Link
                       href="/discover"
-                      className="text-xs font-semibold text-blue-400 hover:underline"
+                      className="text-xs font-semibold text-[#D5B38B] hover:text-[#E4C8A6] hover:underline"
                     >
                       Connect
                     </Link>
@@ -543,44 +575,46 @@ export default async function DashboardPage() {
                 </div>
               ))
             ) : (
-              <p className="text-xs text-slate-500 col-span-2 py-4 text-center">
-                No additional candidates in your network currently. Check Discover as new members join.
+              <p className="text-xs text-[#8FAAB5]/70 col-span-2 py-6 text-center">
+                No additional candidates in your network currently. Check Discover as new builders join.
               </p>
             )}
           </div>
         </div>
 
         {/* Recent Connections (1 column) */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-6 flex flex-col justify-between">
+        <div className="glass-card rounded-2xl p-6 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <div className="flex items-center gap-2">
-                <UserCheck className="h-4 w-4 text-slate-400" />
-                <h2 className="text-sm font-bold text-white">Recent Connections</h2>
+            <div className="flex items-center justify-between border-b border-[#DBD3C1]/10 pb-3.5">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#9E532D]/20 text-[#D5B38B]">
+                  <UserCheck className="h-4 w-4" />
+                </div>
+                <h2 className="font-serif text-base font-medium text-[#DBD3C1]">Network Activity</h2>
               </div>
-              <Link href="/connections" className="text-xs text-blue-400 hover:underline">
-                View All
+              <Link href="/connections" className="text-xs text-[#D5B38B] hover:underline">
+                View All →
               </Link>
             </div>
 
-            <div className="mt-4 space-y-2">
+            <div className="mt-4 space-y-2.5">
               {recentConnections.length > 0 ? (
                 recentConnections.map((c) => (
                   <div
                     key={c.id}
-                    className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950 p-2.5 text-xs"
+                    className="flex items-center justify-between rounded-xl border border-[#DBD3C1]/08 bg-[#192024]/60 p-3 text-xs"
                   >
                     <div>
-                      <h3 className="font-semibold text-white">{c.partner.full_name}</h3>
-                      <p className="text-[10px] text-slate-400">
-                        {c.isOutgoing ? "Sent request" : "Received request"}
+                      <h3 className="font-semibold text-[#DBD3C1] text-xs">{c.partner.full_name}</h3>
+                      <p className="text-[10px] text-[#8FAAB5]">
+                        {c.isOutgoing ? "Sent invitation" : "Received invite"}
                       </p>
                     </div>
                     <span
-                      className={`rounded px-1.5 py-0.5 text-[10px] font-medium border ${
+                      className={`rounded-full px-2 py-0.5 text-[9px] font-semibold border ${
                         c.status === "accepted"
-                          ? "border-emerald-500/30 bg-emerald-950/20 text-emerald-400"
-                          : "border-slate-700 bg-slate-800 text-slate-300"
+                          ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                          : "border-[#DBD3C1]/10 bg-[#252E33]/40 text-[#8FAAB5]"
                       }`}
                     >
                       {c.status}
@@ -588,17 +622,17 @@ export default async function DashboardPage() {
                   </div>
                 ))
               ) : (
-                <p className="text-xs text-slate-500 py-6 text-center">
+                <p className="text-xs text-[#8FAAB5]/70 py-6 text-center">
                   No active connections yet. Explore candidates in Discover.
                 </p>
               )}
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-800">
+          <div className="mt-5 pt-3.5 border-t border-[#DBD3C1]/08">
             <Link
               href="/connections"
-              className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 py-2 text-xs font-medium text-slate-200 transition hover:bg-slate-700 hover:text-white"
+              className="glass-button-secondary inline-flex w-full items-center justify-center gap-1.5 rounded-xl py-2.5 text-xs font-medium"
             >
               <span>Manage Network</span>
               <ArrowRight className="h-3.5 w-3.5" />

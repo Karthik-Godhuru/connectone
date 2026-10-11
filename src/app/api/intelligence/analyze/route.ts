@@ -3,6 +3,8 @@ import { createClient } from "@/lib/supabase/server";
 import { analyzeUserProfile } from "@/lib/gemini/server";
 import type { UserProfileContext, IntelligenceApiResponse } from "@/types/intelligence";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(): Promise<NextResponse<IntelligenceApiResponse>> {
   try {
     const supabase = await createClient();
